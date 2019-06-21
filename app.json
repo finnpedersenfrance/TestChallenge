@@ -1,0 +1,26 @@
+{
+  "id": "b8645f5d-7b63-48aa-97e0-9952e40de39b",
+  "name": "TestChallenge",
+  "publisher": "Finn Pedersen",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "14.0.0.0",
+  "application": "14.0.0.0",
+  "idRanges": [
+    {
+      "from": 85300,
+      "to": 85499
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://TestChallenge.com/help/",
+  "showMyCode": true,
+  "runtime": "3.0"
+}

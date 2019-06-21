@@ -1,0 +1,211 @@
+OBJECT Codeunit 85301 Test Challenge 01
+{
+  OBJECT-PROPERTIES
+  {
+    Date=21-06-19;
+    Time=11:58:48;
+    Version List=TestChallenge1.00;
+  }
+  PROPERTIES
+  {
+    Subtype=Test;
+    OnRun=BEGIN
+          END;
+
+  }
+  CODE
+  {
+
+    PROCEDURE AddComment@100000002(VAR Comment@100000000 : Text[1024];NewComment@100000001 : Text[1024]);
+    BEGIN
+      AddCommentSeparator(Comment,NewComment,';');
+    END;
+
+    PROCEDURE AddCommentSeparator@13(VAR AllComments@1001 : Text[1024];NewComment@1000 : Text[1024];Separator@1002 : Text[10]);
+    BEGIN
+      // The function is supposed to append the NewComment to the AllComments variable and thus return it.
+      // The comments are separated by the Separator text.
+      // More details can be deducted from the test itself.
+      // Implement your solution here.
+      AllComments := '';
+    END;
+
+    PROCEDURE EvaluateDateFromXMLDateTime@1(VAR Date@100000000 : Date;ISO8601DateTime@100000001 : Text[100]) : Boolean;
+    VAR
+      Year@100000002 : Integer;
+      Month@100000003 : Integer;
+      Day@100000004 : Integer;
+    BEGIN
+      // The function is supposed to extract the date from an ISO 8601 DateTime and return it through the Date variable
+      // If a valid date was found, the function returns TRUE otherwise FALSE.
+      // More details can be deducted from the test itself.
+      // Implement your solution here. You can use the TryDMY2DATE function below.
+      Date := 0D;
+      EXIT(FALSE);
+    END;
+
+    [TryFunction]
+    PROCEDURE TryDMY2DATE@100000001(Day@100000000 : Integer;Month@100000001 : Integer;Year@100000002 : Integer;VAR Date@100000003 : Date);
+    BEGIN
+      Date := DMY2DATE(Day,Month,Year);
+    END;
+
+    [Test]
+    PROCEDURE TestAddComment1@100000009();
+    VAR
+      Text@100000001 : Text[1024];
+      OriginalText@1000 : Text[1024];
+    BEGIN
+      Text := '';
+      AddComment(Text,'');
+      IF NOT (Text = '') THEN
+        ERROR('Expected: Adding an empty string to an empty string should result in an empty string. "%1"',Text);
+    END;
+
+    [Test]
+    PROCEDURE TestAddComment2@6();
+    VAR
+      Text@100000001 : Text[1024];
+      OriginalText@1000 : Text[1024];
+    BEGIN
+      Text := 'OK';
+      OriginalText := Text;
+      AddComment(Text,'');
+      IF NOT (Text = OriginalText) THEN
+        ERROR('Expected: Adding an empty string to a non empty string should result in the original string. "%1"',Text);
+    END;
+
+    [Test]
+    PROCEDURE TestAddComment3@5();
+    VAR
+      Text@100000001 : Text[1024];
+      OriginalText@1000 : Text[1024];
+    BEGIN
+      Text := '';
+      AddComment(Text,'OK');
+      IF NOT (Text = 'OK') THEN
+        ERROR('Expected: Adding a non empty string to an empty string should result in the added string. "%1"',Text);
+    END;
+
+    [Test]
+    PROCEDURE TestAddComment4@4();
+    VAR
+      Text@100000001 : Text[1024];
+      OriginalText@1000 : Text[1024];
+    BEGIN
+      Text := 'OK';
+      OriginalText := Text;
+      AddComment(Text,'OK');
+      IF NOT (Text = OriginalText) THEN
+        ERROR('Expected: Adding the identical comment again should not change the string. "%1"',Text);
+    END;
+
+    [Test]
+    PROCEDURE TestAddComment5@3();
+    VAR
+      Text@100000001 : Text[1024];
+      OriginalText@1000 : Text[1024];
+    BEGIN
+      Text := 'OK1;OK2;OK3;OK4';
+      OriginalText := Text;
+      AddComment(Text,'OK3');
+      IF NOT (Text = OriginalText) THEN
+        ERROR('Expected: Adding the same comment again should not change the string. "%1"',Text);
+    END;
+
+    [Test]
+    PROCEDURE TestAddComment6@2();
+    VAR
+      Text@100000001 : Text[1024];
+      OriginalText@1000 : Text[1024];
+    BEGIN
+      Text := PADSTR('',MAXSTRLEN(Text),'X');
+      OriginalText := Text;
+      AddComment(Text,'Y');
+      IF NOT (Text = OriginalText) THEN
+        ERROR('Expected: Adding more text to a string that is already full should not change the string. "%1"',Text);
+    END;
+
+    [Test]
+    PROCEDURE TestEvaluateDateFromXMLDateTime1@100000007();
+    VAR
+      Date@100000001 : Date;
+      DateTimeText@100000002 : Text;
+    BEGIN
+      DateTimeText := '2019-05-07T00:00:00';
+      IF NOT EvaluateDateFromXMLDateTime(Date,DateTimeText) THEN
+        ERROR('Expected to extracte a date from "%1"',DateTimeText);
+    END;
+
+    [Test]
+    PROCEDURE TestEvaluateDateFromXMLDateTime2@12();
+    VAR
+      Date@100000001 : Date;
+      DateTimeText@100000002 : Text;
+    BEGIN
+      DateTimeText := '2019-05-07';
+      IF NOT EvaluateDateFromXMLDateTime(Date,DateTimeText) THEN
+        ERROR('Expected to extracte a date from "%1"',DateTimeText);
+    END;
+
+    [Test]
+    PROCEDURE TestEvaluateDateFromXMLDateTime3@11();
+    VAR
+      Date@100000001 : Date;
+      DateTimeText@100000002 : Text;
+    BEGIN
+      DateTimeText := '2019-02-28T12:34:56';
+      IF NOT EvaluateDateFromXMLDateTime(Date,DateTimeText) THEN
+        ERROR('Expected to extracte a date from "%1"',DateTimeText);
+    END;
+
+    [Test]
+    PROCEDURE TestEvaluateDateFromXMLDateTime4@10();
+    VAR
+      Date@100000001 : Date;
+      DateTimeText@100000002 : Text;
+    BEGIN
+      DateTimeText := '2019-02-29T12:34:56';
+      IF EvaluateDateFromXMLDateTime(Date,DateTimeText) THEN
+        ERROR('Expected to fail extracting a date from "%1"',DateTimeText);
+    END;
+
+    [Test]
+    PROCEDURE TestEvaluateDateFromXMLDateTime5@9();
+    VAR
+      Date@100000001 : Date;
+      DateTimeText@100000002 : Text;
+    BEGIN
+      DateTimeText := 'YYYY-MM-DDT12:34:56';
+      IF EvaluateDateFromXMLDateTime(Date,DateTimeText) THEN
+        ERROR('Expected to fail extracting a date from "%1"',DateTimeText);
+    END;
+
+    [Test]
+    PROCEDURE TestEvaluateDateFromXMLDateTime6@8();
+    VAR
+      Date@100000001 : Date;
+      DateTimeText@100000002 : Text;
+    BEGIN
+      DateTimeText := '';
+      IF EvaluateDateFromXMLDateTime(Date,DateTimeText) THEN
+        ERROR('Expected to fail extracting a date from an empty string');
+    END;
+
+    [Test]
+    PROCEDURE TestTryDMY2DATE@100000004();
+    VAR
+      Date@100000001 : Date;
+    BEGIN
+      IF NOT TryDMY2DATE(29,2,2020,Date) THEN
+        ERROR('Expected to evaluate 29/2/2020 to a date.');
+
+      IF TryDMY2DATE(29,2,2019,Date) THEN
+        ERROR('Expected to fail evaluating 29/2/2019 to a date.');
+    END;
+
+    BEGIN
+    END.
+  }
+}
+
