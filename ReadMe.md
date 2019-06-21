@@ -1,6 +1,49 @@
 # Test Challenge
 
+The idea behind the Test Challenge is to learn about how to write better tests and functions in Microsoft Dynamics NAV and Microsoft Dynamics 365 Business Central. 
+
+This project is inspired by the book Automated Testing in Microsoft Dynamics 365 Business Central written by Luc van Vugt.
+
+I hope that more NAV and BC developers will start writing Automated Tests for their solutions. 
+
+Finn Pedersen
+
+## C/AL or AL
+The C/AL code is located in the Source folder. The AL code is in the root. 
+I have used the https://www.fornav.com/ converter to automatically generate the AL code from the C/AL code. 
+
+## The first challenge
+You have two functions to implement. 
+
+### Add Comment with Separator
+The function is supposed to append the NewComment to the AllComments variable and thus return it.
+The comments are separated by the Separator text.
+More details can be deducted from the test itself.
+
+```` 
+procedure AddCommentSeparator(var AllComments: Text[1024];NewComment: Text[1024];Separator: Text[10])
+begin
+    // Implement your solution here.
+    AllComments := '';
+end;
+```` 
+
+### Evaluate Date From ISO 8601 DateTime String
+The function is supposed to extract the date from an ISO 8601 DateTime and return it through the Date variable
+If a valid date was found, the function returns TRUE otherwise FALSE.
+More details can be deducted from the test itself.
+
+```` 
+    procedure EvaluateDateFromXMLDateTime(var Date: Date;ISO8601DateTime: Text[100]): Boolean
+    begin
+        // Implement your solution here. You can use the TryDMY2DATE function below.
+        Date := 0D;
+        exit(false);
+    end;
+```` 
+
 ## Git Instructions
+If you are new to Github, then here are some typical instructions. 
 
 ### Before making any changes
 Before starting to make changes, make sure that you start on a new branch. These are the steps you need to follow. 
