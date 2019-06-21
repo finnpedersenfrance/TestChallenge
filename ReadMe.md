@@ -11,28 +11,27 @@ Finn Pedersen
 ## The first challenge
 You have two functions to implement. 
 
-- AddCommentSeparator
-- EvaluateDateFromXMLDateTime
+### Add Comment with Separator
+The function is supposed to append the NewComment to the AllComments variable and thus return it.
+The comments are separated by the Separator text.
+More details can be deducted from the test itself.
 
 ```` 
-    procedure AddCommentSeparator(var AllComments: Text[1024];NewComment: Text[1024];Separator: Text[10])
-    begin
-        // The function is supposed to append the NewComment to the AllComments variable and thus return it.
-        // The comments are separated by the Separator text.
-        // More details can be deducted from the test itself.
-        // Implement your solution here.
-        AllComments := '';
-    end;
+procedure AddCommentSeparator(var AllComments: Text[1024];NewComment: Text[1024];Separator: Text[10])
+begin
+    // Implement your solution here.
+    AllComments := '';
+end;
+```` 
 
+### Evaluate Date From ISO 8601 DateTime String
+The function is supposed to extract the date from an ISO 8601 DateTime and return it through the Date variable
+If a valid date was found, the function returns TRUE otherwise FALSE.
+More details can be deducted from the test itself.
+
+```` 
     procedure EvaluateDateFromXMLDateTime(var Date: Date;ISO8601DateTime: Text[100]): Boolean
-    var
-        Year: Integer;
-        Month: Integer;
-        Day: Integer;
     begin
-        // The function is supposed to extract the date from an ISO 8601 DateTime and return it through the Date variable
-        // If a valid date was found, the function returns TRUE otherwise FALSE.
-        // More details can be deducted from the test itself.
         // Implement your solution here. You can use the TryDMY2DATE function below.
         Date := 0D;
         exit(false);
