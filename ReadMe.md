@@ -8,6 +8,10 @@ I hope that more NAV and BC developers will start writing Automated Tests for th
 
 Finn Pedersen
 
+## C/AL or AL
+The C/AL code is located in the Source folder. The AL code is in the root. 
+I have used the https://www.fornav.com/ converter to automatically generate the AL code from the C/AL code. 
+
 ## The first challenge
 You have two functions to implement. 
 
