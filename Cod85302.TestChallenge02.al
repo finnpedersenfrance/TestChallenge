@@ -180,5 +180,29 @@ Codeunit 85302 "Test Challenge 02"
         if hex2intTry(hex,int) then
           Error('I expected the hex2int("%1") to fail, but it returned %2',hex,int);
     end;
+
+    [Test]
+    procedure TestSTXkey2Property()
+    var
+        int: BigInteger;
+        expectedInt: BigInteger;
+        hex: Code[20];
+    begin
+        // This is a line from the fin.stx file.
+        // 00033-00181-030-0: CaptionML
+
+        // You notice the first part: 00033-00181
+        // Let us convert each of the two numbers to HEX put it together and reconvert it to INTEGER
+        // It should become 8629. That is a Property Number.
+
+        // This is a line from the Translation file
+        // T3-P8629-A1033-L999:Payment Terms
+        // So now we know that "Payment Terms" is the CaptionML (ENU) of Table 3.
+
+        int := hex2int(int2hex(33)+int2hex(181));
+        expectedInt := 8629;
+        if not (int = expectedInt) then
+          Error('I expeced to get %1 when converting 00033-00181. I got %2',expectedInt,int);
+    end;
 }
 
