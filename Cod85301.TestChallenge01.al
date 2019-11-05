@@ -1,4 +1,4 @@
-Codeunit 85401 "Test Challenge 01(85301)"
+Codeunit 85301 "Test Challenge 01"
 {
     Subtype = Test;
 

@@ -209,3 +209,264 @@ OBJECT Codeunit 85301 Test Challenge 01
   }
 }
 
+OBJECT Codeunit 85302 Test Challenge 02
+{
+  OBJECT-PROPERTIES
+  {
+    Date=05-11-19;
+    Time=01:37:29;
+    Version List=TestChallenge1.00;
+  }
+  PROPERTIES
+  {
+    Subtype=Test;
+    OnRun=BEGIN
+          END;
+
+  }
+  CODE
+  {
+
+    PROCEDURE hex2int@1(hex@1000 : Code[16]) int : BigInteger;
+    BEGIN
+      // The function is supposed to convert a hex number to an integer.
+      // More details can be deducted from the test itself.
+      // Implement your solution here.
+
+      EXIT(0);
+    END;
+
+    PROCEDURE int2hex@2(int@1000 : BigInteger) hex : Code[16];
+    BEGIN
+      // The function is supposed to convert an integer to hexadecimal.
+      // More details can be deducted from the test itself.
+      // Implement your solution here.
+
+      EXIT('');
+    END;
+
+    [TryFunction]
+    PROCEDURE hex2intTry@13(hex@1000 : Code[16];VAR int@1001 : BigInteger);
+    BEGIN
+      int := hex2int(hex);
+    END;
+
+    [Test]
+    PROCEDURE TestSimpleInt2Hex01@3();
+    VAR
+      int@1000 : Integer;
+      hex@1001 : Code[20];
+    BEGIN
+      int := 15;
+      hex := 'F';
+      IF NOT (int2hex(int) = hex) THEN
+        ERROR('Expected: int2hex("%1") = %2',int,hex);
+    END;
+
+    [Test]
+    PROCEDURE TestSimpleInt2Hex02@4();
+    VAR
+      int@1000 : Integer;
+      hex@1001 : Code[20];
+    BEGIN
+      int := 255;
+      hex := 'FF';
+      IF NOT (int2hex(int) = hex) THEN
+        ERROR('Expected: int2hex("%1") = %2',int,hex);
+    END;
+
+    [Test]
+    PROCEDURE TestSimpleHex2Int03@7();
+    VAR
+      int@1000 : Integer;
+      hex@1001 : Code[20];
+    BEGIN
+      int := 15;
+      hex := 'F';
+      IF NOT (int = hex2int(hex)) THEN
+        ERROR('Expected: hex2int("%1") = %2',hex,int);
+    END;
+
+    [Test]
+    PROCEDURE TestSimpleHex2Int04@8();
+    VAR
+      int@1000 : Integer;
+      hex@1001 : Code[20];
+    BEGIN
+      int := 255;
+      hex := 'FF';
+      IF NOT (int = hex2int(hex)) THEN
+        ERROR('Expected: hex2int("%1") = %2',hex,int);
+    END;
+
+    [Test]
+    PROCEDURE TestRandomDouble05@6();
+    VAR
+      int@1000 : Integer;
+      expectedInt@1001 : Integer;
+      i@1002 : Integer;
+    BEGIN
+      FOR i := 1 TO 100000 DO BEGIN
+        int := RANDOM(999999999);
+        expectedInt := hex2int(int2hex(int));
+        IF NOT (expectedInt = int) THEN
+          ERROR('Expected: converting "%1" to hex and back should result in the original value. Got %2',int,expectedInt);
+      END;
+    END;
+
+    [Test]
+    PROCEDURE TestRandomTrible06@5();
+    VAR
+      int@1000 : Integer;
+      hex@1001 : Code[20];
+      expectedHex@1002 : Code[10];
+      i@1003 : Integer;
+    BEGIN
+      FOR i := 1 TO 100000 DO BEGIN
+        int := RANDOM(999999999);
+        hex := int2hex(int);
+        expectedHex := int2hex(hex2int(hex));
+        IF NOT (expectedHex = hex) THEN
+          ERROR('Expected: converting "%1" to int and back should result in the original value. Got %2',hex,expectedHex);
+      END;
+    END;
+
+    [Test]
+    PROCEDURE Test15hexdigits07@9();
+    VAR
+      int@1000 : BigInteger;
+      hex@1001 : Code[20];
+      expectedHex@1002 : Code[20];
+      i@1003 : Integer;
+      j@1004 : Integer;
+    BEGIN
+      FOR i := 1 TO 15 DO BEGIN
+        int := 1;
+        FOR j := 1 TO i DO
+          int := int * 16;
+        int := int - 1;
+        hex := int2hex(int);
+        expectedHex := PADSTR('',i,'F');
+        IF NOT (expectedHex = hex) THEN
+          ERROR('Expected: (16^%1)-1 should result in F %1 times. Got "%2" <> "%3"',i,hex,expectedHex);
+      END;
+    END;
+
+    [Test]
+    PROCEDURE TestMaxBigInteger08@12();
+    VAR
+      int@1000 : BigInteger;
+      hex@1001 : Code[20];
+      expectedHex@1002 : Code[20];
+    BEGIN
+      int := 9223372036854775807L;
+      hex := int2hex(int);
+      expectedHex := PADSTR('7',16,'F');
+      IF NOT (expectedHex = hex) THEN
+        ERROR('Expected: int2hex %1 should result in %3 (%5). Got %2 (%4)',int,hex,expectedHex,STRLEN(hex),STRLEN(expectedHex));
+    END;
+
+    [Test]
+    PROCEDURE TestNegativeNumber2Hex09@10();
+    VAR
+      int@1002 : BigInteger;
+      hex@1001 : Code[20];
+      expectedHex@1000 : Code[20];
+    BEGIN
+      int := -1;
+      hex := int2hex(int);
+      expectedHex := '';
+      IF NOT (expectedHex = hex) THEN
+        ERROR('Expected: int2hex %1 should result in the empty string. Got "%2"',int,hex);
+    END;
+
+    [Test]
+    PROCEDURE TestHex2IntIncorrectString10@14();
+    VAR
+      int@1002 : BigInteger;
+      hex@1001 : Code[20];
+    BEGIN
+      hex := 'ABCDEFG';
+      IF hex2intTry(hex,int) THEN
+        ERROR('I expected the hex2int("%1") to fail, but it returned %2',hex,int);
+    END;
+
+    [Test]
+    PROCEDURE TestHex2IntIncorrectString11@11();
+    VAR
+      int@1002 : BigInteger;
+      hex@1001 : Code[20];
+    BEGIN
+      hex := 'ABZDE';
+      IF hex2intTry(hex,int) THEN
+        ERROR('I expected the hex2int("%1") to fail, but it returned %2',hex,int);
+    END;
+
+    BEGIN
+    END.
+  }
+}
+
+OBJECT Codeunit 85303 Test Challenge 03
+{
+  OBJECT-PROPERTIES
+  {
+    Date=05-11-19;
+    Time=01:45:48;
+    Version List=TestChallenge1.00;
+  }
+  PROPERTIES
+  {
+    Subtype=Test;
+    OnRun=BEGIN
+          END;
+
+  }
+  CODE
+  {
+
+    [Test]
+    PROCEDURE TestNavisionPowerFunction1@10();
+    VAR
+      int1@1000 : BigInteger;
+      int2@1005 : BigInteger;
+      i@1003 : Integer;
+      j@1004 : Integer;
+    BEGIN
+      FOR i := 1 TO 14 DO BEGIN
+        int1 := 1;
+        FOR j := 1 TO i DO
+          int1 := int1 * 16;
+        int1 := int1 - 1;
+        int2 := POWER(16,i) - 1;
+        IF NOT (int1 = int2) THEN
+          ERROR('Expected: POWER(16,%1)-1 should result in (16^%1)-1. Got "%3" <> "%2"',i,int1,int2);
+      END;
+    END;
+
+    [Test]
+    PROCEDURE TestNavisionPowerFunction2@11();
+    VAR
+      int1@1000 : BigInteger;
+      int2@1005 : BigInteger;
+      i@1003 : Integer;
+      j@1004 : Integer;
+    BEGIN
+      i := 15;
+      int1 := 1;
+      FOR j := 1 TO i DO
+        int1 := int1 * 16;
+      int2 := POWER(16,i);
+      IF NOT (int1 = int2) THEN
+        ERROR('Expected: POWER(16,%1) - 16^%1 = 0. Got "%2"',i,int2-int1);
+    END;
+
+    BEGIN
+    {
+      This test illustrates a bug in the standard POWER function in Dynamics NAV.
+      16 to the power of 15 fails compared to simply multiplying 16 with itself 15 times.
+    }
+    END.
+  }
+}
+
