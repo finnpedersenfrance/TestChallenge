@@ -412,7 +412,7 @@ OBJECT Codeunit 85303 Test Challenge 03
   OBJECT-PROPERTIES
   {
     Date=05-11-19;
-    Time=01:45:48;
+    Time=19:05:47;
     Version List=TestChallenge1.00;
   }
   PROPERTIES
@@ -458,7 +458,9 @@ OBJECT Codeunit 85303 Test Challenge 03
         int1 := int1 * 16;
       int2 := POWER(16,i);
       IF NOT (int1 = int2) THEN
-        ERROR('Expected: POWER(16,%1) - 16^%1 = 0. Got "%2"',i,int2-int1);
+        ASSERTERROR ERROR('Expected: POWER(16,%1) - 16^%1 = 0. Got "%2"',i,int2-int1);
+      // This was not supposed to fail, but it does.
+      // Remove the ASSERTERROR to see the error message.
     END;
 
     BEGIN

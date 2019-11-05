@@ -70,6 +70,11 @@ More details can be deducted from the test itself.
     end;
 ```` 
 
+## The third challenge
+The third challenge is not really a challenge, but rather an illustration of what tests can do. 
+
+If you take a look at the code, you will see that I apparently found a bug in the POWER function in NAV.
+The POWER function fails to calculate a really big number: 16^15. 
 
 
 ## Git Instructions

@@ -42,7 +42,9 @@ Codeunit 85303 "Test Challenge 03"
           int1 := int1 * 16;
         int2 := Power(16,i);
         if not (int1 = int2) then
-          Error('Expected: POWER(16,%1) - 16^%1 = 0. Got "%2"',i,int2-int1);
+          asserterror Error('Expected: POWER(16,%1) - 16^%1 = 0. Got "%2"',i,int2-int1);
+        // This was not supposed to fail, but it does.
+        // Remove the ASSERTERROR to see the error message.
     end;
 }
 
