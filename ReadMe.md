@@ -10,6 +10,7 @@ Finn Pedersen
 
 ## C/AL or AL
 The C/AL code is located in the Source folder. The AL code is in the root. 
+
 I have used the https://www.fornav.com/ converter to automatically generate the AL code from the C/AL code. 
 
 ## The first challenge
@@ -21,11 +22,11 @@ The comments are separated by the Separator text.
 More details can be deducted from the test itself.
 
 ```` 
-procedure AddCommentSeparator(var AllComments: Text[1024];NewComment: Text[1024];Separator: Text[10])
-begin
-    // Implement your solution here.
-    AllComments := '';
-end;
+    procedure AddCommentSeparator(var AllComments: Text[1024];NewComment: Text[1024];Separator: Text[10])
+    begin
+        // Implement your solution here.
+        AllComments := '';
+    end;
 ```` 
 
 ### Evaluate Date From ISO 8601 DateTime String
@@ -41,6 +42,35 @@ More details can be deducted from the test itself.
         exit(false);
     end;
 ```` 
+
+## The second challenge
+You have two functions to implement. 
+
+### Convert an integer to hexadecimal
+The function is supposed to convert a hex number to an integer.
+More details can be deducted from the test itself.
+
+```` 
+    procedure hex2int(hex: Code[16]) int: BigInteger
+    begin
+        // Implement your solution here.
+        exit(0);
+    end;
+```` 
+
+### Convert a hexadecimal to integer
+The function is supposed to convert an integer to hexadecimal.
+More details can be deducted from the test itself.
+
+```` 
+    procedure int2hex(int: BigInteger) hex: Code[16]
+    begin
+        // Implement your solution here.
+        exit('');
+    end;
+```` 
+
+
 
 ## Git Instructions
 If you are new to Github, then here are some typical instructions. 
