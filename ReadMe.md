@@ -30,7 +30,7 @@ More details can be deducted from the test itself.
 ```` 
 
 ### Evaluate Date From ISO 8601 DateTime String
-The function is supposed to extract the date from an ISO 8601 DateTime and return it through the Date variable
+The function is supposed to extract the date from an ISO 8601 DateTime and return it through the Date variable. 
 If a valid date was found, the function returns TRUE otherwise FALSE.
 More details can be deducted from the test itself.
 
