@@ -12,12 +12,12 @@
   "logo": "",
   "dependencies": [],
   "screenshots": [],
-  "platform": "14.0.0.0",
-  "application": "14.0.0.0",
+  "platform": "1.0.0.0",
+  "application": "21.0.0.0",
   "idRanges": [
     {
-      "from": 85300,
-      "to": 85499
+      "from": 50130,
+      "to": 50133
     }
   ],
   "contextSensitiveHelpUrl": "https://TestChallenge.com/help/",

@@ -1,6 +1,9 @@
-Codeunit 85302 "Test Challenge 02"
+Codeunit 50132 "Test Challenge 02"
 {
     Subtype = Test;
+
+    var
+        Solutions: Codeunit "Solutions";
 
     trigger OnRun()
     begin
@@ -12,7 +15,7 @@ Codeunit 85302 "Test Challenge 02"
         // More details can be deducted from the test itself.
         // Implement your solution here.
 
-        exit(0);
+        exit(Solutions.hex2int(hex));
     end;
 
     procedure int2hex(int: BigInteger) hex: Code[16]
@@ -21,11 +24,11 @@ Codeunit 85302 "Test Challenge 02"
         // More details can be deducted from the test itself.
         // Implement your solution here.
 
-        exit('');
+        exit(Solutions.int2hex(int));
     end;
 
     [TryFunction]
-    procedure hex2intTry(hex: Code[16];var int: BigInteger)
+    procedure hex2intTry(hex: Code[16]; var int: BigInteger)
     begin
         int := hex2int(hex);
     end;
@@ -39,7 +42,7 @@ Codeunit 85302 "Test Challenge 02"
         int := 15;
         hex := 'F';
         if not (int2hex(int) = hex) then
-          Error('Expected: int2hex("%1") = %2',int,hex);
+            Error('Expected: int2hex("%1") = %2', int, hex);
     end;
 
     [Test]
@@ -51,7 +54,7 @@ Codeunit 85302 "Test Challenge 02"
         int := 255;
         hex := 'FF';
         if not (int2hex(int) = hex) then
-          Error('Expected: int2hex("%1") = %2',int,hex);
+            Error('Expected: int2hex("%1") = %2', int, hex);
     end;
 
     [Test]
@@ -63,7 +66,7 @@ Codeunit 85302 "Test Challenge 02"
         int := 15;
         hex := 'F';
         if not (int = hex2int(hex)) then
-          Error('Expected: hex2int("%1") = %2',hex,int);
+            Error('Expected: hex2int("%1") = %2', hex, int);
     end;
 
     [Test]
@@ -75,7 +78,7 @@ Codeunit 85302 "Test Challenge 02"
         int := 255;
         hex := 'FF';
         if not (int = hex2int(hex)) then
-          Error('Expected: hex2int("%1") = %2',hex,int);
+            Error('Expected: hex2int("%1") = %2', hex, int);
     end;
 
     [Test]
@@ -86,10 +89,10 @@ Codeunit 85302 "Test Challenge 02"
         i: Integer;
     begin
         for i := 1 to 100000 do begin
-          int := Random(999999999);
-          expectedInt := hex2int(int2hex(int));
-          if not (expectedInt = int) then
-            Error('Expected: converting "%1" to hex and back should result in the original value. Got %2',int,expectedInt);
+            int := Random(999999999);
+            expectedInt := hex2int(int2hex(int));
+            if not (expectedInt = int) then
+                Error('Expected: converting "%1" to hex and back should result in the original value. Got %2', int, expectedInt);
         end;
     end;
 
@@ -102,11 +105,11 @@ Codeunit 85302 "Test Challenge 02"
         i: Integer;
     begin
         for i := 1 to 100000 do begin
-          int := Random(999999999);
-          hex := int2hex(int);
-          expectedHex := int2hex(hex2int(hex));
-          if not (expectedHex = hex) then
-            Error('Expected: converting "%1" to int and back should result in the original value. Got %2',hex,expectedHex);
+            int := Random(999999999);
+            hex := int2hex(int);
+            expectedHex := int2hex(hex2int(hex));
+            if not (expectedHex = hex) then
+                Error('Expected: converting "%1" to int and back should result in the original value. Got %2', hex, expectedHex);
         end;
     end;
 
@@ -120,14 +123,14 @@ Codeunit 85302 "Test Challenge 02"
         j: Integer;
     begin
         for i := 1 to 15 do begin
-          int := 1;
-          for j := 1 to i do
-            int := int * 16;
-          int := int - 1;
-          hex := int2hex(int);
-          expectedHex := PadStr('',i,'F');
-          if not (expectedHex = hex) then
-            Error('Expected: (16^%1)-1 should result in F %1 times. Got "%2" <> "%3"',i,hex,expectedHex);
+            int := 1;
+            for j := 1 to i do
+                int := int * 16;
+            int := int - 1;
+            hex := int2hex(int);
+            expectedHex := PadStr('', i, 'F');
+            if not (expectedHex = hex) then
+                Error('Expected: (16^%1)-1 should result in F %1 times. Got "%2" <> "%3"', i, hex, expectedHex);
         end;
     end;
 
@@ -140,9 +143,9 @@ Codeunit 85302 "Test Challenge 02"
     begin
         int := 9223372036854775807L;
         hex := int2hex(int);
-        expectedHex := PadStr('7',16,'F');
+        expectedHex := PadStr('7', 16, 'F');
         if not (expectedHex = hex) then
-          Error('Expected: int2hex %1 should result in %3 (%5). Got %2 (%4)',int,hex,expectedHex,StrLen(hex),StrLen(expectedHex));
+            Error('Expected: int2hex %1 should result in %3 (%5). Got %2 (%4)', int, hex, expectedHex, StrLen(hex), StrLen(expectedHex));
     end;
 
     [Test]
@@ -156,7 +159,7 @@ Codeunit 85302 "Test Challenge 02"
         hex := int2hex(int);
         expectedHex := '';
         if not (expectedHex = hex) then
-          Error('Expected: int2hex %1 should result in the empty string. Got "%2"',int,hex);
+            Error('Expected: int2hex %1 should result in the empty string. Got "%2"', int, hex);
     end;
 
     [Test]
@@ -166,8 +169,8 @@ Codeunit 85302 "Test Challenge 02"
         hex: Code[20];
     begin
         hex := 'ABCDEFG';
-        if hex2intTry(hex,int) then
-          Error('I expected the hex2int("%1") to fail, but it returned %2',hex,int);
+        if hex2intTry(hex, int) then
+            Error('I expected the hex2int("%1") to fail, but it returned %2', hex, int);
     end;
 
     [Test]
@@ -177,8 +180,8 @@ Codeunit 85302 "Test Challenge 02"
         hex: Code[20];
     begin
         hex := 'ABZDE';
-        if hex2intTry(hex,int) then
-          Error('I expected the hex2int("%1") to fail, but it returned %2',hex,int);
+        if hex2intTry(hex, int) then
+            Error('I expected the hex2int("%1") to fail, but it returned %2', hex, int);
     end;
 
     [Test]
@@ -199,10 +202,10 @@ Codeunit 85302 "Test Challenge 02"
         // T3-P8629-A1033-L999:Payment Terms
         // So now we know that "Payment Terms" is the CaptionML (ENU) of Table 3.
 
-        int := hex2int(int2hex(33)+int2hex(181));
+        int := hex2int(int2hex(33) + int2hex(181));
         expectedInt := 8629;
         if not (int = expectedInt) then
-          Error('I expeced to get %1 when converting 00033-00181. I got %2',expectedInt,int);
+            Error('I expeced to get %1 when converting 00033-00181. I got %2', expectedInt, int);
     end;
 }
 
