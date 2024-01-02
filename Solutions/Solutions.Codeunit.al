@@ -1,4 +1,4 @@
-Codeunit 50130 "Solutions"
+codeunit 50130 "Solutions"
 {
     trigger OnRun()
     begin
@@ -15,12 +15,7 @@ Codeunit 50130 "Solutions"
     end;
 
 
-    procedure EvaluateDateFromXMLDateTime(var Date: Date; ISO8601DateTime: Text[100]): Boolean
-    var
-        Year: Integer;
-        Month: Integer;
-        Day: Integer;
-        DT: DateTime;
+    procedure EvaluateDateFromXMLDateTime(var Date: Date; ISO8601DateTime: Text): Boolean
     begin
         // The function is supposed to extract the date from an ISO 8601 DateTime and return it through the Date variable
         // If a valid date was found, the function returns TRUE otherwise FALSE.

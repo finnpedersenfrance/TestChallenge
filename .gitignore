@@ -8,6 +8,7 @@ TestResults*.xml
 bcptTestResults*.json
 BuildOutput.txt
 rad.json
+**/rad.json
 .output/
 .dependencies/
 .buildartifacts/
@@ -18,3 +19,4 @@ rad.json
 .snapshots/
 cache_*
 ~$*
+*~

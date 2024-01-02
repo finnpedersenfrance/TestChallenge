@@ -1,4 +1,4 @@
-Codeunit 50131 "Test Challenge 01"
+codeunit 50131 "Test Challenge 01"
 {
     Subtype = Test;
 
@@ -24,11 +24,7 @@ Codeunit 50131 "Test Challenge 01"
         Solutions.AddCommentSeparator(AllComments, NewComment, Separator);
     end;
 
-    procedure EvaluateDateFromXMLDateTime(var Date: Date; ISO8601DateTime: Text[100]): Boolean
-    var
-        Year: Integer;
-        Month: Integer;
-        Day: Integer;
+    procedure EvaluateDateFromXMLDateTime(var Date: Date; ISO8601DateTime: Text): Boolean
     begin
         // The function is supposed to extract the date from an ISO 8601 DateTime and return it through the Date variable
         // If a valid date was found, the function returns TRUE otherwise FALSE.
@@ -48,7 +44,6 @@ Codeunit 50131 "Test Challenge 01"
     procedure TestAddComment1()
     var
         Text: Text[1024];
-        OriginalText: Text[1024];
     begin
         Text := '';
         AddComment(Text, '');
@@ -73,7 +68,6 @@ Codeunit 50131 "Test Challenge 01"
     procedure TestAddComment3()
     var
         Text: Text[1024];
-        OriginalText: Text[1024];
     begin
         Text := '';
         AddComment(Text, 'OK');
