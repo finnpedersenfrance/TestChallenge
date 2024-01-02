@@ -1,26 +1,35 @@
 {
-  "id": "b8645f5d-7b63-48aa-97e0-9952e40de39b",
+  "id": "b8645f5d-7b63-48aa-97e0-9952e40de39c",
   "name": "TestChallenge",
-  "publisher": "Finn Pedersen",
+  "publisher": "Finn Pedersen France",
   "version": "1.0.0.0",
-  "brief": "",
-  "description": "",
-  "privacyStatement": "",
-  "EULA": "",
-  "help": "",
-  "url": "",
-  "logo": "",
+  "brief": "Test Challenge",
+  "description": "Simple app to illustrate how to write automated tests in BC.",
+  "privacyStatement": "https://www.finnpedersenfrance.com/",
+  "EULA": "https://www.finnpedersenfrance.com/",
+  "help": "https://www.finnpedersenfrance.com/",
+  "url": "https://www.finnpedersenfrance.com/",
+  "logo": "Logo.png",
   "dependencies": [],
   "screenshots": [],
   "platform": "1.0.0.0",
-  "application": "21.0.0.0",
+  "application": "23.0.0.0",
+  "runtime": "12.0",
   "idRanges": [
     {
       "from": 50125,
       "to": 50129
     }
   ],
-  "contextSensitiveHelpUrl": "https://TestChallenge.com/help/",
-  "showMyCode": true,
-  "runtime": "3.0"
+  "features": [
+    "TranslationFile",
+    "GenerateCaptions",
+    "NoImplicitWith"
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "contextSensitiveHelpUrl": "https://www.finnpedersenfrance.com/"
 }
