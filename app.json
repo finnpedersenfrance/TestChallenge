@@ -16,8 +16,8 @@
   "application": "21.0.0.0",
   "idRanges": [
     {
-      "from": 50130,
-      "to": 50133
+      "from": 50125,
+      "to": 50129
     }
   ],
   "contextSensitiveHelpUrl": "https://TestChallenge.com/help/",

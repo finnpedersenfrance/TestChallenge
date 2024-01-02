@@ -1,4 +1,4 @@
-codeunit 50130 "Solutions"
+codeunit 50125 "Solutions"
 {
     trigger OnRun()
     begin

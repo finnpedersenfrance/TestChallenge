@@ -1,4 +1,4 @@
-codeunit 50133 "Test Challenge 03"
+codeunit 50128 "Test Challenge 03"
 {
     // This test illustrates a bug in the standard POWER function in Dynamics NAV.
     // 16 to the power of 15 fails compared to simply multiplying 16 with itself 15 times.
