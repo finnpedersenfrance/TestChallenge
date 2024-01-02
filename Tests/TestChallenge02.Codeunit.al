@@ -1,4 +1,4 @@
-Codeunit 50132 "Test Challenge 02"
+codeunit 50132 "Test Challenge 02"
 {
     Subtype = Test;
 
@@ -61,7 +61,7 @@ Codeunit 50132 "Test Challenge 02"
     procedure TestSimpleHex2Int03()
     var
         int: Integer;
-        hex: Code[20];
+        hex: Code[16];
     begin
         int := 15;
         hex := 'F';
@@ -73,7 +73,7 @@ Codeunit 50132 "Test Challenge 02"
     procedure TestSimpleHex2Int04()
     var
         int: Integer;
-        hex: Code[20];
+        hex: Code[16];
     begin
         int := 255;
         hex := 'FF';
@@ -100,8 +100,8 @@ Codeunit 50132 "Test Challenge 02"
     procedure TestRandomTrible06()
     var
         int: Integer;
-        hex: Code[20];
-        expectedHex: Code[10];
+        hex: Code[16];
+        expectedHex: Code[16];
         i: Integer;
     begin
         for i := 1 to 100000 do begin
@@ -117,8 +117,8 @@ Codeunit 50132 "Test Challenge 02"
     procedure Test15hexdigits07()
     var
         int: BigInteger;
-        hex: Code[20];
-        expectedHex: Code[20];
+        hex: Code[16];
+        expectedHex: Code[16];
         i: Integer;
         j: Integer;
     begin
@@ -128,7 +128,7 @@ Codeunit 50132 "Test Challenge 02"
                 int := int * 16;
             int := int - 1;
             hex := int2hex(int);
-            expectedHex := PadStr('', i, 'F');
+            expectedHex := CopyStr(PadStr('', i, 'F'), 1, 16);
             if not (expectedHex = hex) then
                 Error('Expected: (16^%1)-1 should result in F %1 times. Got "%2" <> "%3"', i, hex, expectedHex);
         end;
@@ -138,8 +138,8 @@ Codeunit 50132 "Test Challenge 02"
     procedure TestMaxBigInteger08()
     var
         int: BigInteger;
-        hex: Code[20];
-        expectedHex: Code[20];
+        hex: Code[16];
+        expectedHex: Code[16];
     begin
         int := 9223372036854775807L;
         hex := int2hex(int);
@@ -166,7 +166,7 @@ Codeunit 50132 "Test Challenge 02"
     procedure TestHex2IntIncorrectString10()
     var
         int: BigInteger;
-        hex: Code[20];
+        hex: Code[16];
     begin
         hex := 'ABCDEFG';
         if hex2intTry(hex, int) then
@@ -177,7 +177,7 @@ Codeunit 50132 "Test Challenge 02"
     procedure TestHex2IntIncorrectString11()
     var
         int: BigInteger;
-        hex: Code[20];
+        hex: Code[16];
     begin
         hex := 'ABZDE';
         if hex2intTry(hex, int) then
@@ -189,7 +189,6 @@ Codeunit 50132 "Test Challenge 02"
     var
         int: BigInteger;
         expectedInt: BigInteger;
-        hex: Code[20];
     begin
         // This is a line from the fin.stx file.
         // 00033-00181-030-0: CaptionML
@@ -202,7 +201,7 @@ Codeunit 50132 "Test Challenge 02"
         // T3-P8629-A1033-L999:Payment Terms
         // So now we know that "Payment Terms" is the CaptionML (ENU) of Table 3.
 
-        int := hex2int(int2hex(33) + int2hex(181));
+        int := hex2int(CopyStr(int2hex(33) + int2hex(181), 1, 16));
         expectedInt := 8629;
         if not (int = expectedInt) then
             Error('I expeced to get %1 when converting 00033-00181. I got %2', expectedInt, int);
