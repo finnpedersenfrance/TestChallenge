@@ -1,19 +1,24 @@
 {
     "version": "0.2.0",
-    "configurations": [
+    "configurations": [        
         {
-            "name": "Microsoft cloud sandbox",
-            "request": "launch",
+            "name": "Publish: TestChallenge",
             "type": "al",
+            "request": "launch",
             "environmentType": "Sandbox",
-            "environmentName": "fpfrbcdev2",
+            "server": "http://TestChallenge",
+            "serverInstance": "BC",
+            "authentication": "UserPassword",
             "startupObjectId": 130401,
-            "startupObjectType": "Page",
-            "breakOnError": "All",
+            "breakOnError": "ExcludeTry",
+            "breakOnRecordWrite": "None",
             "launchBrowser": true,
-            "enableLongRunningSqlStatements": true,
             "enableSqlInformationDebugger": true,
-            "schemaUpdateMode": "ForceSync"
+            "enableLongRunningSqlStatements": true,
+            "longRunningSqlStatementsThreshold": 500,
+            "numberOfSqlStatements": 10,
+            "tenant": "default",
+            "usePublicURLFromServer": true
         }
     ]
 }
