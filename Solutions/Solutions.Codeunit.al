@@ -106,12 +106,13 @@ codeunit 50125 "Solutions"
     end;
 
     procedure int2hex(int: BigInteger) hex: Code[16]
+    var
+        TypeHelper: Codeunit "Type Helper";
     begin
         // The function is supposed to convert an integer to hexadecimal.
         // More details can be deducted from the test itself.
         // Implement your solution here.
-
-        exit('');
+        exit(CopyStr(TypeHelper.IntToHex(int), 1, 16));
     end;
 
 }
