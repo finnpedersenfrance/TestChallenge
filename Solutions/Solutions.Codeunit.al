@@ -97,12 +97,34 @@ codeunit 50125 "Solutions"
     end;
 
     procedure hex2int(hex: Code[16]) int: BigInteger
+    var
+        Math: Codeunit Math;
+        Char: Char;
+        CharCount: Integer;
+        Value: BigInteger;
+        HexList: List of [Char];
     begin
         // The function is supposed to convert a hex number to an integer.
         // More details can be deducted from the test itself.
         // Implement your solution here.
+        PopulateHexList(HexList);
 
-        exit(0);
+        CharCount := StrLen(hex);
+
+        for CharCount := StrLen(hex) downto 1 do begin
+            Char := hex[CharCount];
+            if HexList.Contains(Char) then
+                Value += ((HexList.IndexOf(Char) - 1) * Math.Pow(16, CharCount - 1))
+            else
+                exit(0);
+        end;
+
+        exit(Value);
+    end;
+
+    local procedure PopulateHexList(var HexList: List of [Char])
+    begin
+        HexList.AddRange('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F');
     end;
 
     procedure int2hex(int: BigInteger) hex: Code[16]
