@@ -5,13 +5,32 @@ codeunit 50125 "Solutions"
     end;
 
     procedure AddCommentSeparator(var AllComments: Text[1024]; NewComment: Text[1024]; Separator: Text[10])
+    var
+        CommentBuilder: TextBuilder;
+        CommentList: List of [Text];
     begin
         // The function is supposed to append the NewComment to the AllComments variable and thus return it.
         // The comments are separated by the Separator text.
         // More details can be deducted from the test itself.
         // Implement your solution here.
+        if NewComment = '' then
+            exit;
 
-        AllComments := '';
+        if AllComments.Contains(Separator) then
+            CommentList := AllComments.Split(Separator)
+        else
+            CommentList.Add(AllComments);
+
+        if CommentList.Contains(NewComment) then
+            exit;
+
+        CommentBuilder.Append(AllComments);
+
+        if CommentBuilder.Length() > 0 then
+            CommentBuilder.Append(Separator);
+
+        CommentBuilder.Append(NewComment);
+        AllComments := CopyStr(CommentBuilder.ToText(), 1, 1024);
     end;
 
 
