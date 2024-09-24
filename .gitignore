@@ -1,4 +1,5 @@
 *.app
+launch.json
 *.flf
 *.bclicense
 *.g.xlf
